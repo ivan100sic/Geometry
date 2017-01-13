@@ -27,6 +27,12 @@
     <ClInclude Include="soft_float.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="backtrack_solver.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="simple_set.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp">

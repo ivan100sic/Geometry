@@ -110,9 +110,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="backtrack_solver.hpp" />
     <ClInclude Include="intersect.hpp" />
     <ClInclude Include="point.hpp" />
     <ClInclude Include="shape.hpp" />
+    <ClInclude Include="simple_set.hpp" />
     <ClInclude Include="soft_float.hpp" />
   </ItemGroup>
   <ItemGroup>

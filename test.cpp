@@ -6,6 +6,7 @@
 using namespace std;
 
 #include "shape.hpp"
+#include "backtrack_solver.hpp"
 
 typedef shape<soft_float> Shape;
 typedef point<soft_float> Point;
@@ -32,6 +33,61 @@ int main() {
 	cout << (double)t1[0].x << ' ' << (double)t1[0].y << endl;
 	cout << (double)t1[1].x << ' ' << (double)t1[1].y << endl;
 
+	cout << "Solving...\n\n";
+
+	if (0) {
+		simple_set<Point> ssp = { Point(0, 0), Point(1, 0) };
+		simple_set<Shape> sss = { Shape(Point(0, 0), Point(1, 0), SHAPE_LINE) };
+		simple_set<Point> tsp;
+		simple_set<Shape> tss = { Shape(Point(0, 0), Point(1, 1), SHAPE_LINE) };
+		backtrack_solver<soft_float> bs(sss, ssp, tss, tsp, 5);
+
+		auto sol = bs.solve();
+
+		for (auto sh : sol.first) {
+			cout << sh << '\n';
+		}
+	}
+
+	if (0) {
+		simple_set<Point> ssp = { Point(0, 0), Point(1, 0) };
+		simple_set<Shape> sss = { Shape(Point(0, 0), Point(1, 0), SHAPE_CIRCLE) };
+		simple_set<Point> tsp;
+		simple_set<Shape> tss = {
+			Shape(Point(1, 0), Point(0, 1), SHAPE_LINE),
+			Shape(Point(0, 1), Point(-1, 0), SHAPE_LINE),
+			Shape(Point(-1, 0), Point(0, -1), SHAPE_LINE),
+			Shape(Point(0, -1), Point(1, 0), SHAPE_LINE)		
+		};
+		backtrack_solver<soft_float> bs(sss, ssp, tss, tsp, 7);
+
+		auto sol = bs.solve();
+
+		for (auto sh : sol.first) {
+			cout << sh << '\n';
+		}
+	}
+
+	{
+		simple_set<Point> ssp = { Point(0, 0), Point(1, 0) };
+		simple_set<Shape> sss = { Shape(Point(0, 0), Point(1, 0), SHAPE_LINE) };
+		simple_set<Point> tsp;
+		simple_set<Shape> tss = {
+			Shape(Point(0, 0), Point(1, 1), SHAPE_LINE),
+			Shape(Point(1, 0), Point(2, 1), SHAPE_LINE),
+			Shape(Point(0, 0.70710678118654752440084436210485), Point(1, 0.70710678118654752440084436210485), SHAPE_LINE)
+		};
+		backtrack_solver<soft_float> bs(sss, ssp, tss, tsp, 7);
+
+		auto sol = bs.solve();
+
+		for (auto sh : sol.first) {
+			cout << sh << '\n';
+		}
+	}
+
+	cout << '\n';
 	system("pause");
+
 	return 0;
 }

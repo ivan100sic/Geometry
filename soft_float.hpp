@@ -1,5 +1,8 @@
 #pragma once
 
+#include <iostream>
+using namespace std;
+
 const double WORKING_PRECISION = 1e-12;
 
 class soft_float {
@@ -37,5 +40,8 @@ public:
 		return sqrt(b.x);
 	}
 
+	friend ostream& operator << (ostream& os, soft_float o) {
+		return os << o.x;
+	}
 };
 

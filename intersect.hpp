@@ -6,12 +6,6 @@
 #include <vector>
 using namespace std;
 
-/* Reconsider */
-template<class Number>
-Number sq(Number x) {
-	return x*x;
-}
-
 template<class Number>
 vector<point<Number>> intersect_line_line(shape<Number> p, shape<Number> q) {
 	/* 0 or 1 point */
