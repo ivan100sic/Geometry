@@ -33,6 +33,12 @@
     <ClInclude Include="simple_set.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="bfs_solver.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="all_intersections.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp">

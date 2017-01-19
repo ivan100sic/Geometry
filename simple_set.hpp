@@ -18,7 +18,12 @@ public:
 	}
 
 	simple_set(initializer_list<T> obj) {
-		for (auto x : obj) insert(x);
+		for (const auto& x : obj) insert(x);
+	}
+
+	template<class Iterable>
+	simple_set(const Iterable& obj) {
+		for (const auto& x : obj) insert(x);
 	}
 
 	void insert(const T& x) {
@@ -58,6 +63,15 @@ public:
 
 	typename vector<T>::const_iterator end() const {
 		return v.end();
+	}
+
+	bool operator == (const simple_set& o) const {
+		if (size() != o.size()) return false;
+		return contains_all(o) && o.contains_all(*this);
+	}
+
+	bool operator != (const simple_set& o) const {
+		return !(*this == o);
 	}
 
 	size_t size() const { return v.size(); }

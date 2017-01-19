@@ -110,7 +110,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="all_intersections.hpp" />
     <ClInclude Include="backtrack_solver.hpp" />
+    <ClInclude Include="bfs_solver.hpp" />
     <ClInclude Include="intersect.hpp" />
     <ClInclude Include="point.hpp" />
     <ClInclude Include="shape.hpp" />

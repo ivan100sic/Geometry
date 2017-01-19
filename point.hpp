@@ -28,6 +28,10 @@ struct point {
 		return !(*this == o);
 	}
 
+	bool operator < (const point& o) const {
+		return x < o.x || (x == o.x && y < o.y);
+	}
+
 	friend ostream& operator << (ostream& os, point p) {
 		return os << '(' << p.x << ", " << p.y << ')';
 	}

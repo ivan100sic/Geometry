@@ -7,7 +7,7 @@
 using namespace std;
 
 template<class Number>
-vector<point<Number>> intersect_line_line(shape<Number> p, shape<Number> q) {
+vector<point<Number>> intersect_line_line(const shape<Number>& p, const shape<Number>& q) {
 	/* 0 or 1 point */
 	Number cross = (p.a.x - p.b.x) * (q.a.y - q.b.y) - (p.a.y - p.b.y) * (q.a.x - q.b.x);
 	if (cross == Number(0)) {
@@ -144,4 +144,64 @@ vector<point<Number>> intersect(const shape<Number>& s1, const shape<Number>& s2
 
 	// failed
 	return vector<point<Number>>();
+}
+
+template<class Number>
+shape<Number> perpendicular_line(const shape<Number>& p, const point<Number>& v) {
+	point<Number> w = v;
+	w.x += p.b.y - p.a.y;
+	w.y -= p.b.x - p.a.x;
+	return shape<Number>(v, w, SHAPE_LINE);
+}
+
+template<class Number>
+shape<Number> bisector(const point<Number>& a, const point<Number>& b) {
+	point<Number> u;
+	u.x = (a.x + b.x) / Number(2);
+	u.y = (a.y + b.y) / Number(2);
+
+	point<Number> v = u;
+	v.x += a.y - b.y;
+	v.y -= a.x - b.x;
+	return shape<Number>(u, v, SHAPE_LINE);
+}
+
+template<class Number>
+shape<Number> angle_bisector(const shape<Number>& p, const shape<Number>& q) {
+	auto v = intersect_line_line(p, q);
+	if (v.empty()) return p;
+	auto u = v[0];
+	auto w = v[0];
+
+	Number lp = sqrt(distance2(p.a, p.b));
+	Number lq = sqrt(distance2(q.a, q.b));
+
+	u.x += (p.b.x - p.a.x) / lp;
+	u.y += (p.b.y - p.a.y) / lp;
+
+	w.x += (q.b.x - q.a.x) / lq;
+	w.y += (q.b.y - q.a.y) / lq;
+
+	point<Number> k((u.x + w.x) / Number(2), (u.y + w.y) / Number(2));
+	return shape<Number>(v[0], k, SHAPE_LINE);
+}
+
+template<class Number>
+shape<Number> angle_bisector2(const shape<Number>& p, const shape<Number>& q) {
+	auto v = intersect_line_line(p, q);
+	if (v.empty()) return p;
+	auto u = v[0];
+	auto w = v[0];
+
+	Number lp = sqrt(distance2(p.a, p.b));
+	Number lq = sqrt(distance2(q.a, q.b));
+
+	u.x += (p.b.x - p.a.x) / lp;
+	u.y += (p.b.y - p.a.y) / lp;
+
+	w.x += (q.a.x - q.b.x) / lq;
+	w.y += (q.a.y - q.b.y) / lq;
+
+	point<Number> k((u.x + w.x) / Number(2), (u.y + w.y) / Number(2));
+	return shape<Number>(v[0], k, SHAPE_LINE);
 }
